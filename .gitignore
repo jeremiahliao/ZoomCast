@@ -91,5 +91,6 @@ typings/
 # Electron-Forge
 out/
 
-# Kiro
+.vscode
+
 .kiro
