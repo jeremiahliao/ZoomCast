@@ -1,13 +1,21 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { ErrorMessage } from '../components/ErrorMessage';
 
 export function SignIn() {
     const { signIn } = useAuth();
     const navigate = useNavigate();
+    const [error, setError] = useState<string | null>(null);
 
     const handleSignIn = async () => {
-        await signIn();
-        navigate('/');
+        setError(null);
+        try {
+            await signIn();
+            navigate('/');
+        } catch (err) {
+            setError(err instanceof Error ? err.message : 'Sign in failed. Please try again.');
+        }
     };
 
     return (
@@ -22,8 +30,7 @@ export function SignIn() {
                 />
                 Sign in with Google
             </button>
-            <p>You'll be asked to grant permission to upload videos to your YouTube channel</p>
-            
+            {error && <ErrorMessage message={error} />}
         </>
     );
 }
