@@ -10,4 +10,6 @@ contextBridge.exposeInMainWorld('versions', {
 
 contextBridge.exposeInMainWorld('auth', {
   signIn: () => ipcRenderer.invoke('auth:start'),
+  restoreSession: () => ipcRenderer.invoke('auth:restoreSession'),
+  signOut: () => ipcRenderer.invoke('auth:signOut'),
 })

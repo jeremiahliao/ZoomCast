@@ -1,46 +1,41 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 
-interface User {
-  name: string;
-  email: string;
-}
-
 interface AuthContextType {
   user: User | null;
   loading: boolean;
   signIn: () => Promise<void>;
-  signOut: () => void;
+  signOut: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
-
-// TODO: replace with real IPC calls e.g. window.auth.getUser()
-const getUser = async (): Promise<User | null> => null;
-const signOut = async (): Promise<void> => { return null };
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
+  // On mount, attempt to restore a persisted session.
+  // restoreSession() silently refreshes the access token if it has expired,
+  // so the app is always ready to make API calls.
   useEffect(() => {
-    getUser().then((u) => {
-      setUser(u);
-      setLoading(false);
-    });
+    window.auth
+      .restoreSession()
+      .then((u) => setUser(u))
+      .catch((err) => console.error('[auth] Session restore failed:', err))
+      .finally(() => setLoading(false));
   }, []);
 
   const signIn = async () => {
-    const u = await (window as any).auth.signIn();
-    setUser(u);
+    const u = await window.auth.signIn();
+    if (u) setUser(u);
   };
 
-  const userSignOut = () => {
-    signOut();
+  const signOut = async () => {
+    await window.auth.signOut();
     setUser(null);
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, signIn: signIn, signOut: userSignOut }}>
+    <AuthContext.Provider value={{ user, loading, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   );
