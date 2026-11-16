@@ -4,27 +4,12 @@ interface ErrorMessageProps {
 
 export function ErrorMessage({ message }: ErrorMessageProps) {
   return (
-    <div style={styles.container} role="alert">
-      <span style={styles.icon}>⚠️</span>
+    <div
+      className="mt-4 flex items-center gap-2 rounded-[var(--radius-md)] border border-[var(--color-danger-border)] bg-[var(--color-danger-surface)] px-3.5 py-2.5 text-sm text-[var(--color-danger-text)]"
+      role="alert"
+    >
+      <span className="shrink-0">⚠️</span>
       <span>{message}</span>
     </div>
   );
 }
-
-const styles: Record<string, React.CSSProperties> = {
-  container: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '8px',
-    marginTop: '1rem',
-    padding: '10px 14px',
-    borderRadius: '6px',
-    border: '1px solid #f5c6cb',
-    background: '#fff5f5',
-    color: '#c0392b',
-    fontSize: '14px',
-  },
-  icon: {
-    flexShrink: 0,
-  },
-};

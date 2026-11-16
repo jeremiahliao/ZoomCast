@@ -27,11 +27,31 @@ const AUTH_SUCCESS_HTML = `<!DOCTYPE html>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Signed In</title>
     <style>
+      :root {
+        color-scheme: light dark;
+
+        --color-canvas: #f7f7f8;
+        --color-surface: #ffffff;
+        --color-text: #18181b;
+        --color-text-muted: #71717a;
+        --color-border: #dedee3;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --color-canvas: #09090b;
+          --color-surface: #18181b;
+          --color-text: #f4f4f5;
+          --color-text-muted: #a1a1aa;
+          --color-border: #303036;
+        }
+      }
+
       * { box-sizing: border-box; margin: 0; padding: 0; }
       body {
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        background: #0f0f0f;
-        color: #f0f0f0;
+        background: var(--color-canvas);
+        color: var(--color-text);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -40,15 +60,17 @@ const AUTH_SUCCESS_HTML = `<!DOCTYPE html>
       .card {
         text-align: center;
         padding: 2.5rem 3rem;
-        background: #1a1a1a;
-        border: 1px solid #2a2a2a;
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
         border-radius: 12px;
         max-width: 360px;
+        max-height: 200px;
         width: 100%;
+        height: 100%;
       }
       .icon { font-size: 2.5rem; margin-bottom: 1rem; }
       h1 { font-size: 1.4rem; font-weight: 600; margin-bottom: 0.5rem; }
-      p { font-size: 0.9rem; color: #888; }
+      p { font-size: 0.9rem; color: var(--color-text-muted); }
     </style>
   </head>
   <body>

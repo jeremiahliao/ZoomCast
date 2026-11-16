@@ -4,6 +4,7 @@ import { Home } from './pages/home';
 import { SignIn } from './pages/signin';
 import { AuthProvider } from './context/AuthContext';
 import { ProtectedRoute } from './components/ProtectedRoute';
+import { Settings } from './pages/settings';
 
 
 function App() {
@@ -15,6 +16,11 @@ function App() {
                     <Route path="/" element={
                         <ProtectedRoute>
                             <Home />
+                        </ProtectedRoute>
+                    } />
+                    <Route path="/settings" element={
+                        <ProtectedRoute>
+                            <Settings />
                         </ProtectedRoute>
                     } />
                 </Routes>

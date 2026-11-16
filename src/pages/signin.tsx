@@ -1,7 +1,11 @@
-import { useState } from 'react';
+import { useState, type ComponentType } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FcGoogle } from "react-icons/fc";
 import { useAuth } from '../context/AuthContext';
 import { ErrorMessage } from '../components/ErrorMessage';
+import { Button } from '../components/Button';
+
+const GoogleIcon = FcGoogle as ComponentType<{ className?: string }>;
 
 export function SignIn() {
     const { signIn } = useAuth();
@@ -19,39 +23,16 @@ export function SignIn() {
     };
 
     return (
-        <>
-            <h1>ZoomCast</h1>
-            <h4>Turn your Zoom recordings into Youtube videos in minutes</h4>
-            <button onClick={handleSignIn} style={styles.button}>
-                <img
-                    src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
-                    alt=""
-                    style={styles.icon}
-                />
+        <main className="mx-auto flex min-h-screen max-w-lg flex-col items-center justify-center px-6 py-12 text-center">
+            <h1 className="text-3xl font-semibold tracking-tight">ZoomCast</h1>
+            <p className="mt-2 text-base font-normal text-[var(--color-text-muted)]">
+                Turn your Zoom recordings into YouTube videos in minutes
+            </p>
+            <Button onClick={handleSignIn} variant="provider">
+                <GoogleIcon className="h-[18px] w-[18px] shrink-0" />
                 Sign in with Google
-            </button>
+            </Button>
             {error && <ErrorMessage message={error} />}
-        </>
+        </main>
     );
 }
-
-const styles: Record<string, React.CSSProperties> = {
-    button: {
-        display: 'flex',
-        alignItems: 'center',
-        gap: '10px',
-        padding: '10px 20px',
-        marginTop: '1.5rem',
-        border: '1px solid #dadce0',
-        borderRadius: '4px',
-        background: '#fff',
-        color: '#3c4043',
-        fontSize: '15px',
-        fontWeight: 500,
-        cursor: 'pointer',
-    },
-    icon: {
-        width: '18px',
-        height: '18px',
-    },
-};

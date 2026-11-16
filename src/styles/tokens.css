@@ -1,0 +1,51 @@
+/*
+ * Semantic design tokens
+ *
+ * Components should consume these variables instead of palette values. New
+ * themes can override this set without changing component styles.
+ */
+:root {
+  color-scheme: light dark;
+
+  --color-canvas: #f7f7f8;
+  --color-surface: #ffffff;
+  --color-surface-subtle: #f1f1f3;
+  --color-surface-hover: #e7e7ea;
+  --color-text: #18181b;
+  --color-text-muted: #71717a;
+  --color-border: #dedee3;
+  --color-focus: #2563eb;
+  --color-danger-surface: #fff1f2;
+  --color-danger-border: #fecdd3;
+  --color-danger-text: #be123c;
+
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.06), 0 8px 24px rgb(0 0 0 / 0.04);
+  --transition-fast: 150ms ease;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-canvas: #09090b;
+    --color-surface: #18181b;
+    --color-surface-subtle: #27272a;
+    --color-surface-hover: #3f3f46;
+    --color-text: #f4f4f5;
+    --color-text-muted: #a1a1aa;
+    --color-border: #303036;
+    --color-focus: #60a5fa;
+    --color-danger-surface: #3f1019;
+    --color-danger-border: #881337;
+    --color-danger-text: #fda4af;
+
+    --shadow-card: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px rgb(0 0 0 / 0.16);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast: 0ms;
+  }
+}
